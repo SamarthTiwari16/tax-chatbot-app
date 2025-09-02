@@ -1,38 +1,177 @@
-.App {
+/* --- Global Styles & Layout --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f0f4f8;
+  background-image: url('./background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  color: #334155;
+}
+
+/* --- Landing Page / Main Container --- */
+.landing-container {
+  max-width: 900px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  border: 1px solid rgba(226, 232, 240, 0.7);
+  /* This animation is for the container itself loading */
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+.landing-header {
+  margin-bottom: 24px;
+}
+
+.landing-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.landing-subtitle {
+  font-size: 1.125rem;
+  color: #64748b;
+  margin: 8px 0 0 0;
+}
+
+.landing-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #475569;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* --- AI Input Area --- */
+.ai-input-box {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  margin-top: 20px;
+  resize: vertical;
+}
+
+.ai-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.ai-buttons button {
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    background-color: #2563eb;
+    color: white;
+    transition: background-color 0.2s;
+}
+
+.ai-buttons button:hover {
+  background-color: #1d4ed8;
+}
+
+.reset-button-ai {
+    background-color: #f1f5f9 !important;
+    color: #475569 !important;
+    border: 1px solid #cbd5e1 !important;
+}
+.reset-button-ai:hover {
+    background-color: #e2e8f0 !important;
+}
+
+
+.error-message {
+    color: #be123c;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* --- Summary Comparison Layout --- */
+.summary-comparison {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  margin-top: 30px;
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .summary-comparison {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* --- Results Area Styles & Scroll Animation --- */
+.results-area {
+  margin-top: 40px;
+  width: 100%;
+  /* Start hidden, ready for animation */
+  opacity: 0;
+}
+
+.results-area.animate-fade-in {
+  /* Trigger the animation */
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* --- NEW: The Missing Keyframes Animation --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.savings-info {
+  background-color: #dbeafe;
+  color: #1e3a8a;
+  border: 1px solid #93c5fd;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 30px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.savings-info h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.savings-info p {
+  margin-bottom: 0;
+  font-size: 1.1rem;
+  line-height: 1.6;
 }
