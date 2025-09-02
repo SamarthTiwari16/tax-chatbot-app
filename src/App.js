@@ -23,7 +23,8 @@ function App() {
       if (regimeSummaries) {
         try {
           const userData = regimeSummaries.oldRegime;
-          const response = await fetch('http://localhost:5001/api/recommend', {
+          // UPDATED URL for recommendations
+          const response = await fetch('https://tax-chatbot-app.onrender.com/api/recommend', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ userData }),
@@ -48,7 +49,8 @@ function App() {
     setRecommendations('');
 
     try {
-      const response = await fetch('http://localhost:5001/api/extract', {
+      // UPDATED URL for data extraction
+      const response = await fetch('https://tax-chatbot-app.onrender.com/api/extract', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text: inputText }),
