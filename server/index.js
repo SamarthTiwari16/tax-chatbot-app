@@ -9,9 +9,8 @@ if (process.env.NODE_ENV !== 'production') {
 
 const app = express();
 
-// IMPORTANT: Update this with your Vercel URL
 app.use(cors({
-  origin: ["http://localhost:3000", "https://your-app-name.vercel.app"] 
+  origin: ["http://localhost:3000", "https://tax-chatbot-app.vercel.app/"] 
 }));
 app.use(express.json());
 
