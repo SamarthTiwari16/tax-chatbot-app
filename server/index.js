@@ -5,14 +5,22 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 // Only load dotenv in a non-production environment
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
-} // <<< THE FIX IS HERE: Added the missing closing brace
+}
 
 const app = express();
 
+// IMPORTANT: Make sure this is your correct Vercel app URL
 app.use(cors({
   origin: ["http://localhost:3000", "https://tax-chatbot-app.vercel.app/"] 
 }));
 app.use(express.json());
+
+// --- THIS IS THE FIX ---
+// Add a simple "health check" route for the front door
+app.get('/', (req, res) => {
+  res.status(200).send('Server is alive and running!');
+});
+// --------------------
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
@@ -21,14 +29,7 @@ const dataExtractionPrompt = `
 You are an expert tax preparation assistant in India. Your task is to extract specific financial details from the user's text and return them as a structured JSON object. Extract: grossSalary, otherIncome, deduction80C, deduction80D, hraExemption, professionalTax. Rules: If a value is not mentioned, set it to 0. The final output MUST be only a valid JSON object.`;
 
 const recommendationPrompt = `
-You are a helpful and cautious financial assistant in India. Your goal is to provide actionable tax-saving recommendations based on the user's financial data.
-- The user's data will be provided as a JSON object.
-- Analyze the data, particularly their income and existing deductions under the Old Tax Regime.
-- Identify areas where they could save more tax.
-- Provide 2-3 clear, concise, and actionable recommendations.
-- Frame your response in markdown format for easy display. Start with a main heading like "### 💡 AI-Powered Recommendations".
-- CRUCIAL: Always include a disclaimer at the end: "**Disclaimer:** These are AI-generated suggestions and not professional financial advice. Please consult with a qualified financial advisor."
-`;
+You are a helpful and cautious financial assistant in India. Your goal is to provide actionable tax-saving recommendations based on the user's financial data. Provide 2-3 clear, concise, and actionable recommendations in markdown format. Always include a disclaimer at the end: "**Disclaimer:** These are AI-generated suggestions and not professional financial advice. Please consult with a qualified financial advisor."`;
 
 app.post('/api/extract', async (req, res) => {
   const { text } = req.body;
