@@ -23,7 +23,6 @@ function App() {
       if (regimeSummaries) {
         try {
           const userData = regimeSummaries.oldRegime;
-          // --- FIX IS HERE ---
           const response = await fetch('https://tax-chatbot-app.onrender.com/api/recommend', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -49,7 +48,6 @@ function App() {
     setRecommendations('');
 
     try {
-      // --- AND THE FIX IS HERE ---
       const response = await fetch('https://tax-chatbot-app.onrender.com/api/extract', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -125,6 +123,13 @@ function App() {
           <Recommendations text={recommendations} />
         </div>
       )}
+
+      {/* --- Copyright Footer --- */}
+      <footer className="app-footer">
+        <p>© {new Date().getFullYear()} Samarth Tiwari. All Rights Reserved.</p>
+      </footer>
+      {/* ----------------------- */}
+
     </div>
   );
 }
