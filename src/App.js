@@ -23,7 +23,8 @@ function App() {
       if (regimeSummaries) {
         try {
           const userData = regimeSummaries.oldRegime;
-          const response = await fetch('http://localhost:5001/api/recommend', {
+          // --- FIX IS HERE ---
+          const response = await fetch('https://tax-chatbot-app.onrender.com/api/recommend', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ userData }),
@@ -48,7 +49,8 @@ function App() {
     setRecommendations('');
 
     try {
-      const response = await fetch('http://localhost:5001/api/extract', {
+      // --- AND THE FIX IS HERE ---
+      const response = await fetch('https://tax-chatbot-app.onrender.com/api/extract', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text: inputText }),
@@ -85,7 +87,7 @@ function App() {
   return (
     <div className="landing-container">
       <div className="landing-header">
-        <h1 className="landing-title">AI TaxPrep Assistant 🤖</h1>
+        <h1 className="landing-title">AI Tax Preparation Assistant </h1>
         <p className="landing-subtitle">Describe your finances. Get your tax summary & advice.</p>
       </div>
       <p className="landing-description">
