@@ -27,7 +27,6 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   text-align: center;
   border: 1px solid rgba(226, 232, 240, 0.7);
-  /* This animation is for the container itself loading */
   animation: fadeIn 0.5s ease-in-out;
 }
 
@@ -134,16 +133,13 @@ body {
 .results-area {
   margin-top: 40px;
   width: 100%;
-  /* Start hidden, ready for animation */
   opacity: 0;
 }
 
 .results-area.animate-fade-in {
-  /* Trigger the animation */
   animation: fadeInUp 0.8s ease-out forwards;
 }
 
-/* --- NEW: The Missing Keyframes Animation --- */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -174,4 +170,19 @@ body {
   margin-bottom: 0;
   font-size: 1.1rem;
   line-height: 1.6;
+}
+
+/* --- App Footer --- */
+.app-footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+  width: 100%;
+}
+
+.app-footer p {
+  margin: 0;
+  font-size: 0.875rem; /* 14px */
+  color: #94a3b8; /* A muted, light grey color */
+  text-align: center;
 }
