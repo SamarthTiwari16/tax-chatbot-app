@@ -2,54 +2,38 @@ const express = require('express');
 const cors = require('cors');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
-<<<<<<< HEAD
-=======
 // Only load dotenv in a non-production environment
->>>>>>> 33309a7c390b82a770675d2b3b0623daf22cb4a8
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
 const app = express();
-<<<<<<< HEAD
-app.use(cors({
-  // Remember to replace this with your actual Vercel app URL
-=======
 
 // IMPORTANT: Make sure this is your correct Vercel app URL
 app.use(cors({
->>>>>>> 33309a7c390b82a770675d2b3b0623daf22cb4a8
   origin: ["http://localhost:3000", "https://tax-chatbot-app.vercel.app"] 
 }));
 app.use(express.json());
 
-<<<<<<< HEAD
-app.get('/', (req, res) => {
-  res.status(200).send('Server is alive and running!');
-});
-=======
-// --- THIS IS THE FIX ---
 // Add a simple "health check" route for the front door
 app.get('/', (req, res) => {
   res.status(200).send('Server is alive and running!');
 });
-// --------------------
->>>>>>> 33309a7c390b82a770675d2b3b0623daf22cb4a8
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
 
-<<<<<<< HEAD
-// --- AI Prompt for Tax Data Extraction (No Changes) ---
-const dataExtractionPrompt = `You are an expert tax preparation assistant in India...`; // Kept short for brevity
+// --- AI Prompt for Tax Data Extraction ---
+const dataExtractionPrompt = `
+You are an expert tax preparation assistant in India. Your task is to extract specific financial details from the user's text and return them as a structured JSON object. Extract: grossSalary, otherIncome, deduction80C, deduction80D, hraExemption, professionalTax. Rules: If a value is not mentioned, set it to 0. The final output MUST be only a valid JSON object.`;
 
-// --- AI Prompt for Tax Recommendations (No Changes) ---
-const recommendationPrompt = `You are a helpful and cautious financial assistant in India...`; // Kept short for brevity
+// --- AI Prompt for Tax Recommendations ---
+const recommendationPrompt = `
+You are a helpful and cautious financial assistant in India. Your goal is to provide actionable tax-saving recommendations based on the user's financial data. Provide 2-3 clear, concise, and actionable recommendations in markdown format. Always include a disclaimer at the end: "**Disclaimer:** These are AI-generated suggestions and not professional financial advice. Please consult with a qualified financial advisor."`;
 
-// --- NEW: AI Prompt for Retirement Planning ---
+// --- AI Prompt for Retirement Planning ---
 const retirementPlannerPrompt = `
 You are an expert retirement planner for the Indian context. Your task is to generate a personalized, encouraging, and actionable retirement plan based on the user's data.
-
 - The user's data will be provided as a JSON object containing their current age, desired retirement age, annual salary (in lakhs), current savings (in lakhs), and optional notes.
 - Assume an average annual return of 10% on investments and an inflation rate of 6%.
 - Project the future value of their current savings.
@@ -58,52 +42,10 @@ You are an expert retirement planner for the Indian context. Your task is to gen
 - Suggest a sample investment allocation (e.g., 70% Equity Mutual Funds, 20% Debt, 10% Gold) based on their age and any notes they provided about risk appetite.
 - Frame the response in clear markdown format. Start with a main heading.
 - CRUCIAL: Always include a disclaimer at the end.
-
-Example Input Data:
-{
-  "age": 30,
-  "retireAge": 60,
-  "salary": 20,
-  "savings": 10,
-  "notes": "I have a moderate risk appetite."
-}
-
-Example Output:
-### 📈 Your Personalized Retirement Plan
-
-Hello! Based on the information you provided, here is a simple projection for your retirement journey.
-
-**1. Your Retirement Goal**
-To maintain your current lifestyle, you'll need an estimated corpus of **₹5 Crore** at age 60.
-
-**2. Where You Are Today**
-Your current savings of **₹10 lakhs**, if left to grow at 10% annually, could be worth approximately **₹1.74 Crore** by the time you retire. This is a fantastic start!
-
-**3. The Path Forward**
-To bridge the remaining gap, you would need to start a monthly investment (SIP) of approximately **₹25,000**.
-
-**4. Sample Investment Strategy**
-Given your age and moderate risk appetite, a balanced allocation could be:
-* **70% in Equity Mutual Funds (Index Funds)** for long-term growth.
-* **20% in Debt Instruments (PPF, Debt Funds)** for stability.
-* **10% in Gold/International Equity** for diversification.
-
-**Disclaimer:** This is a simplified, AI-generated projection and not professional financial advice. Market returns are not guaranteed. Please consult with a qualified financial advisor to create a detailed plan.
 `;
 
-
 // --- API Endpoints ---
-
-=======
-const dataExtractionPrompt = `
-You are an expert tax preparation assistant in India. Your task is to extract specific financial details from the user's text and return them as a structured JSON object. Extract: grossSalary, otherIncome, deduction80C, deduction80D, hraExemption, professionalTax. Rules: If a value is not mentioned, set it to 0. The final output MUST be only a valid JSON object.`;
-
-const recommendationPrompt = `
-You are a helpful and cautious financial assistant in India. Your goal is to provide actionable tax-saving recommendations based on the user's financial data. Provide 2-3 clear, concise, and actionable recommendations in markdown format. Always include a disclaimer at the end: "**Disclaimer:** These are AI-generated suggestions and not professional financial advice. Please consult with a qualified financial advisor."`;
-
->>>>>>> 33309a7c390b82a770675d2b3b0623daf22cb4a8
 app.post('/api/extract', async (req, res) => {
-  // ... (no changes to this endpoint)
   const { text } = req.body;
   try {
     const result = await model.generateContent([dataExtractionPrompt, text]);
@@ -117,7 +59,6 @@ app.post('/api/extract', async (req, res) => {
 });
 
 app.post('/api/recommend', async (req, res) => {
-  // ... (no changes to this endpoint)
   const { userData } = req.body;
     try {
       const result = await model.generateContent([recommendationPrompt, JSON.stringify(userData)]);
@@ -129,7 +70,6 @@ app.post('/api/recommend', async (req, res) => {
     }
 });
 
-// --- NEW: API endpoint for the Retirement Planner ---
 app.post('/api/plan-retirement', async (req, res) => {
   const { formData } = req.body;
   try {
