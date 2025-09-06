@@ -8,12 +8,12 @@ if (process.env.NODE_ENV !== 'production') {
 
 const app = express();
 
-// --- THIS IS THE FIX ---
-// Using your exact Vercel URL
+// --- THIS IS THE FINAL FIX ---
+// Using your exact, final Vercel URL
 app.use(cors({
   origin: [
     "http://localhost:3000", 
-    "https://tax-chatbot-7nv6ylazg-samarth-tiwari-s-projects.vercel.app"
+    "https://tax-chatbot-app.vercel.app"
   ] 
 }));
 // --------------------
@@ -26,6 +26,8 @@ app.get('/', (req, res) => {
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
+
+// All your AI prompts and API endpoints below this line remain the same...
 
 const dataExtractionPrompt = `
 You are an expert tax preparation assistant in India. Your task is to extract specific financial details from the user's text and return them as a structured JSON object. Extract: grossSalary, otherIncome, deduction80C, deduction80D, hraExemption, professionalTax. Rules: If a value is not mentioned, set it to 0. The final output MUST be only a valid JSON object.`;
