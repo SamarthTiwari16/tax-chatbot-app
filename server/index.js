@@ -2,24 +2,44 @@ const express = require('express');
 const cors = require('cors');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
+<<<<<<< HEAD
+=======
+// Only load dotenv in a non-production environment
+>>>>>>> 33309a7c390b82a770675d2b3b0623daf22cb4a8
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
 const app = express();
+<<<<<<< HEAD
 app.use(cors({
   // Remember to replace this with your actual Vercel app URL
+=======
+
+// IMPORTANT: Make sure this is your correct Vercel app URL
+app.use(cors({
+>>>>>>> 33309a7c390b82a770675d2b3b0623daf22cb4a8
   origin: ["http://localhost:3000", "https://tax-chatbot-app.vercel.app"] 
 }));
 app.use(express.json());
 
+<<<<<<< HEAD
 app.get('/', (req, res) => {
   res.status(200).send('Server is alive and running!');
 });
+=======
+// --- THIS IS THE FIX ---
+// Add a simple "health check" route for the front door
+app.get('/', (req, res) => {
+  res.status(200).send('Server is alive and running!');
+});
+// --------------------
+>>>>>>> 33309a7c390b82a770675d2b3b0623daf22cb4a8
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
 
+<<<<<<< HEAD
 // --- AI Prompt for Tax Data Extraction (No Changes) ---
 const dataExtractionPrompt = `You are an expert tax preparation assistant in India...`; // Kept short for brevity
 
@@ -74,6 +94,14 @@ Given your age and moderate risk appetite, a balanced allocation could be:
 
 // --- API Endpoints ---
 
+=======
+const dataExtractionPrompt = `
+You are an expert tax preparation assistant in India. Your task is to extract specific financial details from the user's text and return them as a structured JSON object. Extract: grossSalary, otherIncome, deduction80C, deduction80D, hraExemption, professionalTax. Rules: If a value is not mentioned, set it to 0. The final output MUST be only a valid JSON object.`;
+
+const recommendationPrompt = `
+You are a helpful and cautious financial assistant in India. Your goal is to provide actionable tax-saving recommendations based on the user's financial data. Provide 2-3 clear, concise, and actionable recommendations in markdown format. Always include a disclaimer at the end: "**Disclaimer:** These are AI-generated suggestions and not professional financial advice. Please consult with a qualified financial advisor."`;
+
+>>>>>>> 33309a7c390b82a770675d2b3b0623daf22cb4a8
 app.post('/api/extract', async (req, res) => {
   // ... (no changes to this endpoint)
   const { text } = req.body;
