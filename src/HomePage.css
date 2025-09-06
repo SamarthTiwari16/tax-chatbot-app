@@ -1,0 +1,126 @@
+.home-page-layout { /* This class is now applied to the .app-container for HomePage */
+  padding: 60px 40px; /* More padding top/bottom */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Pushes footer to the bottom */
+  min-height: 500px; /* Ensure enough height for visual separation */
+}
+
+.home-header {
+  text-align: center;
+  margin-bottom: 50px; /* More space below header */
+}
+
+.home-header h1 {
+  font-size: 2.8rem; /* Larger, more impactful title */
+  color: #1e293b;
+  margin-bottom: 1.2rem;
+  line-height: 1.2;
+}
+
+.home-header p {
+  font-size: 1.3rem; /* Larger subtitle */
+  color: #64748b;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.tool-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px; /* Increased gap */
+  text-align: left;
+  flex-grow: 1; /* Allows cards to take up available space */
+  margin-bottom: 40px; /* Space above footer */
+}
+
+.tool-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 30px; /* More padding */
+  border: 1px solid #e2e8f0;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  position: relative; /* For the gradient effect */
+  overflow: hidden; /* For the gradient effect */
+}
+
+.tool-card:hover {
+  transform: translateY(-8px); /* More pronounced lift */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12); /* Stronger shadow */
+  border-color: #2563eb;
+}
+
+/* Subtle gradient on hover */
+.tool-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(37, 99, 235, 0.05), rgba(37, 99, 235, 0)); /* Light blue gradient */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+}
+.tool-card:hover::before {
+    opacity: 1;
+}
+
+.tool-card h3 {
+  margin-top: 0;
+  color: #2563eb;
+  font-size: 1.5rem; /* Slightly larger title */
+  position: relative; /* Ensure text is above pseudo-element */
+  z-index: 1;
+}
+
+.tool-card p {
+  color: #475569;
+  line-height: 1.7; /* Better readability */
+  position: relative; /* Ensure text is above pseudo-element */
+  z-index: 1;
+}
+
+.tool-card.coming-soon {
+  background-color: #f8fafc;
+  border-style: dashed;
+  display: flex;
+  flex-direction: column; /* Stack header and paragraph */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: not-allowed; /* Indicate it's not clickable */
+  box-shadow: none; /* No shadow for coming soon */
+  transform: none; /* No lift for coming soon */
+}
+.tool-card.coming-soon:hover::before {
+    opacity: 0; /* No gradient for coming soon */
+}
+
+
+.tool-card.coming-soon h3 {
+    color: #94a3b8;
+    position: relative;
+    z-index: 1;
+}
+.tool-card.coming-soon p {
+    color: #94a3b8;
+    position: relative;
+    z-index: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .home-header h1 {
+    font-size: 2rem;
+  }
+  .home-header p {
+    font-size: 1rem;
+  }
+  .tool-cards {
+    gap: 20px;
+  }
+}
