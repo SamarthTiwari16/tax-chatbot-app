@@ -9,7 +9,7 @@ if (process.env.NODE_ENV !== 'production') {
 const app = express();
 
 // --- THIS IS THE FIX ---
-// Added your live Vercel URL to the list of allowed origins
+// Using your exact Vercel URL
 app.use(cors({
   origin: [
     "http://localhost:3000", 
