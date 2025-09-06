@@ -2,20 +2,24 @@ const express = require('express');
 const cors = require('cors');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
-// Only load dotenv in a non-production environment
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
 const app = express();
 
-// IMPORTANT: Make sure this is your correct Vercel app URL
+// --- THIS IS THE FIX ---
+// Added your live Vercel URL to the list of allowed origins
 app.use(cors({
-  origin: ["http://localhost:3000", "https://tax-chatbot-app.vercel.app"] 
+  origin: [
+    "http://localhost:3000", 
+    "https://tax-chatbot-7nv6ylazg-samarth-tiwari-s-projects.vercel.app"
+  ] 
 }));
+// --------------------
+
 app.use(express.json());
 
-// Add a simple "health check" route for the front door
 app.get('/', (req, res) => {
   res.status(200).send('Server is alive and running!');
 });
@@ -23,15 +27,12 @@ app.get('/', (req, res) => {
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
 
-// --- AI Prompt for Tax Data Extraction ---
 const dataExtractionPrompt = `
 You are an expert tax preparation assistant in India. Your task is to extract specific financial details from the user's text and return them as a structured JSON object. Extract: grossSalary, otherIncome, deduction80C, deduction80D, hraExemption, professionalTax. Rules: If a value is not mentioned, set it to 0. The final output MUST be only a valid JSON object.`;
 
-// --- AI Prompt for Tax Recommendations ---
 const recommendationPrompt = `
 You are a helpful and cautious financial assistant in India. Your goal is to provide actionable tax-saving recommendations based on the user's financial data. Provide 2-3 clear, concise, and actionable recommendations in markdown format. Always include a disclaimer at the end: "**Disclaimer:** These are AI-generated suggestions and not professional financial advice. Please consult with a qualified financial advisor."`;
 
-// --- AI Prompt for Retirement Planning ---
 const retirementPlannerPrompt = `
 You are an expert retirement planner for the Indian context. Your task is to generate a personalized, encouraging, and actionable retirement plan based on the user's data.
 - The user's data will be provided as a JSON object containing their current age, desired retirement age, annual salary (in lakhs), current savings (in lakhs), and optional notes.
@@ -44,7 +45,6 @@ You are an expert retirement planner for the Indian context. Your task is to gen
 - CRUCIAL: Always include a disclaimer at the end.
 `;
 
-// --- API Endpoints ---
 app.post('/api/extract', async (req, res) => {
   const { text } = req.body;
   try {
