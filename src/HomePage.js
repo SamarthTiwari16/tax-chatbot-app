@@ -34,10 +34,14 @@ function HomePage() {
           <h3>📈 AI Retirement Planner</h3>
           <p>Answer a few questions to generate a personalized retirement plan and investment suggestions.</p>
         </Link>
-        {/* --- NEW: Card for the Insurance Calculator --- */}
         <Link to="/insurance-calculator" className="tool-card">
           <h3>🛡️ AI Insurance Advisor</h3>
           <p>Calculate the optimal life and health insurance coverage you need to protect your family.</p>
+        </Link>
+        {/* --- NEW: Card for the Investment Recommender --- */}
+        <Link to="/investment-recommender" className="tool-card">
+            <h3>💰 AI Investment Recommender</h3>
+            <p>Get a personalized investment portfolio based on your financial goals and risk tolerance.</p>
         </Link>
       </div>
        <footer className="app-footer">

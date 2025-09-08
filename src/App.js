@@ -6,13 +6,14 @@ import { auth } from './firebase';
 import HomePage from './HomePage';
 import TaxCalculator from './TaxCalculator';
 import RetirementPlanner from './RetirementPlanner';
-import InsuranceCalculator from './InsuranceCalculator'; // 1. Import the new component
+import InsuranceCalculator from './InsuranceCalculator';
+import InvestmentRecommender from './InvestmentRecommender'; // 1. Import
 import LoginPage from './LoginPage';
 import SignupPage from './SignupPage';
 
 import './App.css';
 
-// A special component to protect routes
+// ... (PrivateRoute function remains the same)
 function PrivateRoute({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -22,12 +23,11 @@ function PrivateRoute({ children }) {
       setUser(currentUser);
       setLoading(false);
     });
-    // Cleanup subscription on unmount
     return () => unsubscribe();
   }, []);
 
   if (loading) {
-    return <div className="loading-screen">Loading...</div>; // A simple loading message
+    return <div className="loading-screen">Loading...</div>;
   }
 
   return user ? children : <Navigate to="/login" />;
@@ -38,16 +38,15 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Public Routes */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
 
-        {/* Protected Routes */}
         <Route path="/" element={<PrivateRoute><HomePage /></PrivateRoute>} />
         <Route path="/tax-calculator" element={<PrivateRoute><TaxCalculator /></PrivateRoute>} />
         <Route path="/retirement-planner" element={<PrivateRoute><RetirementPlanner /></PrivateRoute>} />
-        {/* 2. Add the new protected route */}
         <Route path="/insurance-calculator" element={<PrivateRoute><InsuranceCalculator /></PrivateRoute>} />
+        {/* 2. Add the new protected route */}
+        <Route path="/investment-recommender" element={<PrivateRoute><InvestmentRecommender /></PrivateRoute>} />
       </Routes>
     </Router>
   );
