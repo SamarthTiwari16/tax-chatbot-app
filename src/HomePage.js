@@ -1,10 +1,26 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './HomePage.css'; // Keep specific HomePage styles
+import { Link, useNavigate } from 'react-router-dom';
+import { signOut } from "firebase/auth";
+import { auth } from './firebase';
+import './HomePage.css';
 
 function HomePage() {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate('/login'); // Redirect to login page after logout
+    } catch (err) {
+      console.error("Failed to log out:", err);
+    }
+  };
+
   return (
-    <div className="app-container home-page-layout"> {/* Added app-container here */}
+    <div className="app-container home-page-layout">
+      {/* Add the logout button */}
+      <button onClick={handleLogout} className="logout-button">Logout</button>
+
       <div className="home-header">
         <h1>Welcome to Your Financial AI</h1>
         <p>A suite of AI-powered tools to help you navigate your finances with confidence.</p>
@@ -18,10 +34,11 @@ function HomePage() {
           <h3>📈 AI Retirement Planner</h3>
           <p>Answer a few questions to generate a personalized retirement plan and investment suggestions.</p>
         </Link>
-        <div className="tool-card coming-soon">
-          <h3>💡 More Tools Coming Soon...</h3>
-          <p>Check back later for more AI-powered financial tools.</p>
-        </div>
+        {/* --- NEW: Card for the Insurance Calculator --- */}
+        <Link to="/insurance-calculator" className="tool-card">
+          <h3>🛡️ AI Insurance Advisor</h3>
+          <p>Calculate the optimal life and health insurance coverage you need to protect your family.</p>
+        </Link>
       </div>
        <footer className="app-footer">
         <p>© {new Date().getFullYear()} Samarth Tiwari. All Rights Reserved.</p>
