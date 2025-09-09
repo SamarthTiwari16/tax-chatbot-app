@@ -7,14 +7,29 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const app = express();
-app.use(cors({
-  origin: [
+
+const whitelist = [
     "http://localhost:3000",
-    "http://localhost:5500",
+    "http://localhost:5500", 
     "https://tax-chatbot-app.vercel.app",
     "https://tax-chatbot-7nv6ylazg-samarth-tiwari-s-projects.vercel.app"
-  ]
-}));
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (whitelist.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+};
+
+app.use(cors(corsOptions));
+// --------------------------------
+
 app.use(express.json());
 
 app.get('/', (req, res) => {
@@ -23,7 +38,6 @@ app.get('/', (req, res) => {
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
-
 // --- All AI Prompts ---
 const dataExtractionPrompt = `
 You are an expert tax preparation assistant in India. Your task is to extract specific financial details from the user's text.
