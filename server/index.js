@@ -27,7 +27,7 @@ const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
 // --- All AI Prompts ---
 const dataExtractionPrompt = `
 You are an expert tax preparation assistant in India. Your task is to extract specific financial details from the user's text.
-CRUCIAL: Your entire response MUST be only a valid JSON object enclosed in markdown ```json ... ``` tags. Do not include any other text or explanations.
+CRUCIAL: Your entire response MUST be only a valid JSON object enclosed in markdown \`\`\`json ... \`\`\` tags. Do not include any other text or explanations.
 Extract: grossSalary, otherIncome, deduction80C, deduction80D, hraExemption, professionalTax.
 If a value is not mentioned, set it to 0.`;
 
