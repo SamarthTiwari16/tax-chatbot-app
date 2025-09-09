@@ -18,7 +18,6 @@ function HomePage() {
 
   return (
     <div className="app-container home-page-layout">
-      {/* Add the logout button */}
       <button onClick={handleLogout} className="logout-button">Logout</button>
 
       <div className="home-header">
@@ -43,6 +42,13 @@ function HomePage() {
             <h3>💰 AI Investment Recommender</h3>
             <p>Get a personalized investment portfolio based on your financial goals and risk tolerance.</p>
         </Link>
+        <Link to="/loan-advisor" className="tool-card">
+            <h3>🏦 AI Loan & Debt Advisor</h3>
+            <p>Analyze loan costs, understand your EMI, and get advice on debt management strategies.</p>
+        </Link>
+        <div className="tool-card coming-soon">
+            <h3>💡 More Tools Coming Soon...</h3>
+        </div>
       </div>
        <footer className="app-footer">
         <p>© {new Date().getFullYear()} Samarth Tiwari. All Rights Reserved.</p>

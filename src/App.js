@@ -10,6 +10,7 @@ import InsuranceCalculator from './InsuranceCalculator';
 import InvestmentRecommender from './InvestmentRecommender'; // 1. Import
 import LoginPage from './LoginPage';
 import SignupPage from './SignupPage';
+import LoanAdvisor from './LoanAdvisor';
 
 import './App.css';
 
@@ -45,8 +46,8 @@ function App() {
         <Route path="/tax-calculator" element={<PrivateRoute><TaxCalculator /></PrivateRoute>} />
         <Route path="/retirement-planner" element={<PrivateRoute><RetirementPlanner /></PrivateRoute>} />
         <Route path="/insurance-calculator" element={<PrivateRoute><InsuranceCalculator /></PrivateRoute>} />
-        {/* 2. Add the new protected route */}
         <Route path="/investment-recommender" element={<PrivateRoute><InvestmentRecommender /></PrivateRoute>} />
+        <Route path="/loan-advisor" element={<PrivateRoute><LoanAdvisor /></PrivateRoute>} />
       </Routes>
     </Router>
   );

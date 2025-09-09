@@ -29,10 +29,45 @@
 
 .radio-group label {
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* Changed from 'center' to 'flex-start' */
     gap: 10px;
     cursor: pointer;
+    font-size: 1rem; /* Ensure consistent font size */
+    color: #334155; /* Darker text for readability */
 }
+
+/* New: Style for the actual radio input element */
+.radio-group input[type="radio"] {
+    appearance: none; /* Hide default radio button */
+    -webkit-appearance: none;
+    width: 20px; /* Custom size for the radio button */
+    height: 20px;
+    border: 2px solid #a78bfa; /* Border color for unselected */
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0; /* Prevent it from shrinking */
+    margin-top: 2px; /* Small adjustment for vertical alignment with text */
+}
+
+/* New: Style for the checked state (the inner dot) */
+.radio-group input[type="radio"]:checked {
+    border-color: #7c3aed; /* Border color when selected */
+}
+
+.radio-group input[type="radio"]:checked::before {
+    content: '';
+    width: 10px; /* Size of the inner dot */
+    height: 10px;
+    background-color: #7c3aed; /* Color of the inner dot */
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+}
+
 
 .recommender-button {
   margin-top: 30px;

@@ -1,0 +1,35 @@
+.advisor-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.advisor-header h2 {
+  font-size: 1.8rem;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+.advisor-header p {
+  font-size: 1.1rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.advisor-form {
+  margin-top: 20px;
+}
+
+.advisor-button {
+  margin-top: 30px;
+  width: 100%;
+  padding: 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+  border: none;
+  background-color: #db2777; /* A distinct pink for this tool */
+  color: white;
+  transition: background-color 0.2s;
+}
+.advisor-button:hover {
+  background-color: #be185d;
+}
