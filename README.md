@@ -1,6 +1,6 @@
 # AI-Powered Financial Suite
 
-[![Live Demo](https://img.shields.io/badge/LIVE%20DEMO-grey?style=for-the-badge&logo=vercel&logoColor=white&labelColor=555&color=007AFF)](https://tax-chatbot-app.vercel.app)
+[![VERCEL LINK](https://img.shields.io/badge/LIVE%20DEMO-grey?style=for-the-badge&logo=vercel&logoColor=white&labelColor=555&color=007AFF)](https://tax-chatbot-app.vercel.app)
 
 ## What is the Project About? (The Big Picture)
 
