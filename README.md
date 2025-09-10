@@ -1,5 +1,7 @@
 # AI-Powered Financial Suite
 
+[![Live Demo on Vercel](https://img.shields.io/badge/Live%20Demo%20on%20Vercel-black?style=flat&logo=vercel&logoColor=white)](https://tax-chatbot-app.vercel.app)
+
 ## What is the Project About? (The Big Picture)
 
 This project is a sophisticated, multi-tool web application designed to simplify complex personal finance decisions for users in India. The core idea is to replace the confusion and intimidation of traditional financial forms and calculations with a smart, conversational, and user-friendly experience.
