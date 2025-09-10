@@ -145,21 +145,5 @@ Experience the AI-Powered Financial Suite live:
 
 * **Samarth Tiwari**
     * GitHub: [https://github.com/SamarthTiwari16](https://github.com/SamarthTiwari16)
-
-## Learn More (Original Create React App Docs)
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). For more details on standard Create React App functionalities, refer to the original documentation:
-
-* [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started)
-* [React documentation](https://reactjs.org/)
-
-### Available Scripts
-
-In the project directory, you can run:
-
-* `npm start`
-* `npm test`
-* `npm run build`
-* `npm run eject` (Note: this is a one-way operation)
-
-*(The rest of the original Create React App documentation links will follow here as they were.)*
+    * Email - [samarthtiwarij16@gmail.com](samarthtiwarij16@gmail.com)
+    * Project link - [https://tax-chatbot-app.vercel.app](https://tax-chatbot-app.vercel.app)
