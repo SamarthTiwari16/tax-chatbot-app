@@ -1,4 +1,4 @@
-# AI-Powered Financial Suite
+# Apex Finance
 
 [![VERCEL LINK](https://img.shields.io/badge/VERCEL%20LINK-grey?style=for-the-badge&logo=vercel&logoColor=white&labelColor=555&color=007AFF)](https://tax-chatbot-app.vercel.app)
 
